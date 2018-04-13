@@ -3,7 +3,7 @@ package com.switchfully.order.domain;
 import java.util.Map;
 import java.util.UUID;
 
-public abstract class Repository<T extends Entity, U extends EntityDatabase<T>> {
+public abstract class Repository<T extends BaseEntity, U extends EntityDatabase<T>> {
 
     private U database;
 

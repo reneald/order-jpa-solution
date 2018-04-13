@@ -1,6 +1,6 @@
 package com.switchfully.order.domain;
 
-public abstract class EntityValidator<T extends Entity> {
+public abstract class EntityValidator<T extends BaseEntity> {
 
     public boolean isValidForCreation(T entity) {
         return !isAFieldEmptyOrNull(entity) && entity.getId() == null;

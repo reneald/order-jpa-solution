@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 /**
  * A Dummy In-Memory Database....
  */
-public abstract class EntityDatabase<T extends Entity> {
+public abstract class EntityDatabase<T extends BaseEntity> {
 
     private Map<UUID, T> entities;
 
@@ -16,7 +16,7 @@ public abstract class EntityDatabase<T extends Entity> {
 
     void poplulate(T... entities) {
         this.entities = Arrays.stream(entities)
-                .collect(Collectors.toMap(Entity::getId, entity -> entity));
+                .collect(Collectors.toMap(BaseEntity::getId, entity -> entity));
     }
 
     public Map<UUID, T> getAll() {
