@@ -21,6 +21,20 @@
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!--Because of license issues, oracle ojdbc is not publicly available on mvncentral -->
+        <!--Therefore, it's included in the GitHub repository and added as a dependency like this -->
+        <dependency>
+            <groupId>oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.3</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/libraries/ojdbc6-11.2.0.3.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
