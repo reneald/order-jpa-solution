@@ -4,14 +4,29 @@ import com.switchfully.order.domain.BaseEntity;
 import com.switchfully.order.domain.items.prices.Price;
 import com.switchfully.order.infrastructure.builder.Builder;
 
+import javax.persistence.*;
 import java.util.UUID;
 
+@Entity
+@Table(name = "ITEMS")
 public class Item extends BaseEntity {
 
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "DESCRIPTION")
     private String description;
+
+    @Embedded
+    @AttributeOverride(name = "amount", column = @Column(name = "PRICE_AMOUNT"))
     private Price price;
+
+    @Column(name = "AMOUNT_OF_STOCK")
     private int amountOfStock;
+
+    private Item() {
+        // hibernate
+    }
 
     public Item(ItemBuilder itemBuilder) {
         super(itemBuilder.id);

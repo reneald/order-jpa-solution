@@ -6,6 +6,11 @@ public final class Price {
 
     private final BigDecimal amount;
 
+    // hibernate
+    private Price() {
+        amount = null;
+    }
+
     private Price(BigDecimal amount) {
         this.amount = amount;
     }

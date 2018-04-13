@@ -1,45 +1,31 @@
 package com.switchfully.order.domain;
 
-import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.UUID;
 
-public abstract class Repository<T extends BaseEntity, U extends EntityDatabase<T>> {
+public abstract class Repository<T extends BaseEntity> {
 
-    private U database;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public Repository(U database) {
-        this.database = database;
-    }
-
-    protected U getDatabase() {
-        return database;
+    protected EntityManager getEntityManager() {
+        return entityManager;
     }
 
     public T save(T entity) {
         entity.generateId();
-        database.save(entity);
+        entityManager.persist(entity);
         return entity;
     }
 
     public T update(T entity) {
-        database.save(entity);
+        entityManager.persist(entity);
         return entity;
     }
 
-    public Map<UUID, T> getAll() {
-        return database.getAll();
-    }
+    public abstract List<T> getAll();
+    public abstract T get(UUID entityId);
 
-    public T get(UUID entityId) {
-        return database.getAll().get(entityId);
-    }
-
-    /**
-     * Since we don't use transactions yet, we need a way to reset the database
-     * in the tests. We'll use this method. Obviously this is a method that should
-     * never be available in production...
-     */
-    public void reset() {
-        database.reset();
-    }
 }

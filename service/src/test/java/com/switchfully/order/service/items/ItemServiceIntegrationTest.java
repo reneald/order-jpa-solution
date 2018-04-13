@@ -4,7 +4,6 @@ import com.switchfully.order.IntegrationTest;
 import com.switchfully.order.domain.items.Item;
 import com.switchfully.order.domain.items.ItemRepository;
 import com.switchfully.order.domain.items.prices.Price;
-import org.junit.After;
 import org.junit.Test;
 
 import javax.inject.Inject;
@@ -20,11 +19,6 @@ public class ItemServiceIntegrationTest extends IntegrationTest {
     private ItemService itemService;
 
     @Inject private ItemRepository itemRepository;
-
-    @After
-    public void resetDatabase() {
-        itemRepository.reset();
-    }
 
     @Test
     public void createItem() {

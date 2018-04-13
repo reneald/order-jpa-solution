@@ -5,7 +5,6 @@ import com.switchfully.order.domain.items.ItemRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,6 +45,6 @@ public class ItemService {
     }
 
     public List<Item> getAllItems() {
-        return new ArrayList<>(itemRepository.getAll().values());
+        return itemRepository.getAll();
     }
 }

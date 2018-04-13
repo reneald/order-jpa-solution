@@ -4,7 +4,6 @@ import com.switchfully.order.ControllerIntegrationTest;
 import com.switchfully.order.domain.items.Item;
 import com.switchfully.order.domain.items.ItemRepository;
 import com.switchfully.order.domain.items.prices.Price;
-import org.junit.After;
 import org.junit.Test;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
@@ -25,11 +24,6 @@ public class ItemControllerIntegrationTest extends ControllerIntegrationTest {
 
     @Inject
     private ItemMapper itemMapper;
-
-    @After
-    public void resetDatabase() {
-        itemRepository.reset();
-    }
 
     @Test
     public void createItem() {
