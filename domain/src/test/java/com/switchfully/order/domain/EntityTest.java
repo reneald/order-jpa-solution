@@ -17,7 +17,7 @@ public class EntityTest {
 
     @Test
     public void generateId_givenCustomerWithoutId_whenGeneratingId_thenGenerateId() {
-        Entity aCustomer = aCustomer().build();
+        BaseEntity aCustomer = aCustomer().build();
         aCustomer.generateId();
         Assertions.assertThat(aCustomer.getId())
                 .isNotNull()
@@ -27,7 +27,7 @@ public class EntityTest {
     @Test
     public void generateId_givenCustomerWithId_whenGeneratingId_thenThrowException() {
         UUID id = UUID.randomUUID();
-        Entity customer = aCustomer().build();
+        BaseEntity customer = aCustomer().build();
         Whitebox.setInternalState(customer, "id", id);
 
         expectedException.expect(IllegalStateException.class);

@@ -2,11 +2,11 @@ package com.switchfully.order.domain;
 
 import java.util.UUID;
 
-public abstract class Entity {
+public abstract class BaseEntity {
 
     private UUID id;
 
-    protected Entity(UUID id) {
+    protected BaseEntity(UUID id) {
         this.id = id;
     }
 

@@ -1,12 +1,12 @@
 package com.switchfully.order.domain.items;
 
-import com.switchfully.order.domain.Entity;
+import com.switchfully.order.domain.BaseEntity;
 import com.switchfully.order.domain.items.prices.Price;
 import com.switchfully.order.infrastructure.builder.Builder;
 
 import java.util.UUID;
 
-public class Item extends Entity {
+public class Item extends BaseEntity {
 
     private String name;
     private String description;

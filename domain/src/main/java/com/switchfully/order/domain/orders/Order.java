@@ -1,6 +1,6 @@
 package com.switchfully.order.domain.orders;
 
-import com.switchfully.order.domain.Entity;
+import com.switchfully.order.domain.BaseEntity;
 import com.switchfully.order.domain.items.prices.Price;
 import com.switchfully.order.domain.orders.orderitems.OrderItem;
 import com.switchfully.order.infrastructure.builder.Builder;
@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-public class Order extends Entity {
+public class Order extends BaseEntity {
 
     private List<OrderItem> orderItems;
     private UUID customerId;
