@@ -14,7 +14,6 @@ import com.switchfully.order.infrastructure.exceptions.NotAuthorizedException;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -64,11 +63,11 @@ public class OrderService {
         if (onlyIncludeShippableToday) {
             return getOrdersOnlyContainingOrderItemsShippingToday();
         }
-        return new ArrayList<>(orderRepository.getAll().values());
+        return orderRepository.getAll();
     }
 
     private List<Order> getOrdersOnlyContainingOrderItemsShippingToday() {
-        return orderRepository.getAll().values().stream()
+        return orderRepository.getAll().stream()
                 .map(order -> order()
                         .withCustomerId(order.getCustomerId())
                         .withId(order.getId())

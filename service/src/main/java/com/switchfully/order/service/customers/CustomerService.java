@@ -5,7 +5,6 @@ import com.switchfully.order.domain.customers.CustomerRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public class CustomerService {
     }
 
     public List<Customer> getAllCustomers() {
-        return new ArrayList<>(customerRepository.getAll().values());
+        return customerRepository.getAll();
     }
 
     public Customer getCustomer(UUID id) {

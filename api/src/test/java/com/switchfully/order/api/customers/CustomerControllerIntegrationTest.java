@@ -8,7 +8,6 @@ import com.switchfully.order.api.interceptors.ControllerExceptionHandler;
 import com.switchfully.order.domain.customers.Customer;
 import com.switchfully.order.domain.customers.CustomerRepository;
 import com.switchfully.order.domain.customers.CustomerTestBuilder;
-import org.junit.After;
 import org.junit.Test;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
@@ -25,11 +24,6 @@ public class CustomerControllerIntegrationTest extends ControllerIntegrationTest
 
     @Inject
     private CustomerMapper customerMapper;
-
-    @After
-    public void resetDatabase() {
-        customerRepository.reset();
-    }
 
     @Test
     public void createCustomer() {

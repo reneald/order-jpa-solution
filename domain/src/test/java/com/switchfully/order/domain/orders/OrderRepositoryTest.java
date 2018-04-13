@@ -11,17 +11,14 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.switchfully.order.domain.orders.OrderTestBuilder.anOrder;
-import static org.mockito.Mockito.when;
 
 public class OrderRepositoryTest {
 
     private OrderRepository orderRepository;
-    private OrderDatabase orderDatabaseMock;
 
     @Before
     public void setupRepository() {
-        orderDatabaseMock = Mockito.mock(OrderDatabase.class);
-        orderRepository = new OrderRepository(orderDatabaseMock, Mockito.mock(ApplicationEventPublisher.class));
+        orderRepository = new OrderRepository(Mockito.mock(ApplicationEventPublisher.class));
     }
 
     @Test
@@ -34,7 +31,6 @@ public class OrderRepositoryTest {
         orders.put(order1.getId(), order1);
         orders.put(order2.getId(), order2);
         orders.put(order3.getId(), order3);
-        when(orderDatabaseMock.getAll()).thenReturn(orders);
 
         List<Order> ordersForCustomer = orderRepository.getOrdersForCustomer(customerId);
 

@@ -1,27 +1,18 @@
-package com.switchfully.order.domain;
+package com.switchfully.order.domain.customers;
 
 import com.switchfully.order.IntegrationTest;
-import com.switchfully.order.domain.customers.Customer;
-import com.switchfully.order.domain.customers.CustomerDatabase;
 import org.assertj.core.api.Assertions;
-import org.junit.After;
 import org.junit.Test;
 
 import javax.inject.Inject;
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
 
 import static com.switchfully.order.domain.customers.CustomerTestBuilder.aCustomer;
 
-public class RepositoryIntegrationTest extends IntegrationTest {
+public class CustomerRepositoryIntegrationTest extends IntegrationTest {
 
     @Inject
-    private Repository<Customer, CustomerDatabase> repository;
-
-    @After
-    public void resetDatabase() {
-        repository.reset();
-    }
+    private CustomerRepository repository;
 
     @Test
     public void save() {
@@ -67,9 +58,9 @@ public class RepositoryIntegrationTest extends IntegrationTest {
         Customer customerOne = repository.save(aCustomer().build());
         Customer customerTwo = repository.save(aCustomer().build());
 
-        Map<UUID, Customer> allCustomers = repository.getAll();
+        List<Customer> allCustomers = repository.getAll();
 
-        Assertions.assertThat(allCustomers.values())
+        Assertions.assertThat(allCustomers)
                 .containsExactlyInAnyOrder(customerOne, customerTwo);
     }
 

@@ -8,7 +8,6 @@ import com.switchfully.order.domain.items.ItemRepository;
 import com.switchfully.order.domain.items.prices.Price;
 import com.switchfully.order.domain.orders.Order;
 import com.switchfully.order.domain.orders.OrderRepository;
-import org.junit.After;
 import org.junit.Test;
 
 import javax.inject.Inject;
@@ -35,13 +34,6 @@ public class OrderServiceIntegrationTest extends IntegrationTest {
 
     @Inject
     private ItemRepository itemRepository;
-
-    @After
-    public void resetDatabase() {
-        orderRepository.reset();
-        customerRepository.reset();
-        itemRepository.reset();
-    }
 
     @Test
     public void createOrder() {

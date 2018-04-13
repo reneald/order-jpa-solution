@@ -13,7 +13,6 @@ import com.switchfully.order.domain.items.ItemRepository;
 import com.switchfully.order.domain.items.prices.Price;
 import com.switchfully.order.domain.orders.Order;
 import com.switchfully.order.domain.orders.OrderRepository;
-import org.junit.After;
 import org.junit.Test;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 
@@ -38,13 +37,6 @@ public class OrderControllerIntegrationTest extends ControllerIntegrationTest {
 
     @Inject
     private OrderRepository orderRepository;
-
-    @After
-    public void resetDatabase() {
-        customerRepository.reset();
-        itemRepository.reset();
-        orderRepository.reset();
-    }
 
     @Test
     public void createOrder() {
