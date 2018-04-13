@@ -2,11 +2,20 @@ package com.switchfully.order.domain.customers.emails;
 
 import com.switchfully.order.infrastructure.builder.Builder;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public final class Email {
 
     private final String localPart;
     private final String domain;
     private final String complete;
+
+    private Email() {
+        localPart = null;
+        domain = null;
+        complete = null;
+    }
 
     private Email(EmailBuilder emailBuilder) {
         this.localPart = emailBuilder.localPart;

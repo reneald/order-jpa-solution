@@ -2,12 +2,22 @@ package com.switchfully.order.domain.customers.addresses;
 
 import com.switchfully.order.infrastructure.builder.Builder;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public final class Address {
 
     private final String streetName;
     private final String houseNumber;
     private final String postalCode;
     private final String country;
+
+    private Address() {
+        streetName = null;
+        houseNumber = null;
+        postalCode = null;
+        country = null;
+    }
 
     public Address(AddressBuilder addressBuilder) {
         this.streetName = addressBuilder.streetName;

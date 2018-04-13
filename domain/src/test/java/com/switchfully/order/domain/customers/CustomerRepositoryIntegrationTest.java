@@ -26,24 +26,6 @@ public class CustomerRepositoryIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void update() {
-        Customer customerToSave = aCustomer().withFirstname("Jo").withLastname("Jorissen").build();
-        Customer savedCustomer = repository.save(customerToSave);
-
-
-        Customer updatedCustomer = repository.update(aCustomer()
-                .withId(savedCustomer.getId())
-                .withFirstname("Joske")
-                .withLastname("Jorissen")
-                .build());
-
-        Assertions.assertThat(updatedCustomer.getId()).isNotNull().isEqualTo(savedCustomer.getId());
-        Assertions.assertThat(updatedCustomer.getFirstname()).isEqualTo("Joske");
-        Assertions.assertThat(updatedCustomer.getLastname()).isEqualTo("Jorissen");
-        Assertions.assertThat(repository.getAll()).hasSize(1);
-    }
-
-    @Test
     public void get() {
         Customer savedCustomer = repository.save(aCustomer().build());
 
