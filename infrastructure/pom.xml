@@ -30,10 +30,10 @@
         <!--Therefore, it's included in the GitHub repository and added as a dependency like this -->
         <dependency>
             <groupId>oracle</groupId>
-            <artifactId>ojdbc6</artifactId>
-            <version>11.2.0.3</version>
+            <artifactId>ojdbc8</artifactId>
+            <version>12.2.0.1</version>
             <scope>system</scope>
-            <systemPath>${basedir}/libraries/ojdbc6-11.2.0.3.jar</systemPath>
+            <systemPath>${basedir}/libraries/ojdbc8.jar</systemPath>
         </dependency>
     </dependencies>
 
