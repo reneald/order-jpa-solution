@@ -25,56 +25,75 @@ public class ItemControllerIntegrationTest extends ControllerIntegrationTest {
     @Inject
     private ItemMapper itemMapper;
 
+    @Override
+    public void clearDatabase() {
+        itemRepository.getEntityManager().createQuery("DELETE FROM Item").executeUpdate();
+    }
+
     @Test
     public void createItem() {
-        ItemDto itemToCreate = new ItemDto()
-                .withName("Half-Life 3")
-                .withDescription("Boehoehoe...")
-                .withPrice(45.50f)
-                .withAmountOfStock(50510);
-
         ItemDto itemDto = new TestRestTemplate()
-                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME), itemToCreate, ItemDto.class);
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME), createAnItem(), ItemDto.class);
 
         assertThat(itemDto.getId()).isNotNull().isNotEmpty();
-        assertThat(itemDto).isEqualToIgnoringGivenFields(itemToCreate, "id", "stockUrgency");
+        assertThat(itemDto).isEqualToIgnoringGivenFields(createAnItem(), "id", "stockUrgency");
     }
 
     @Test
     public void getAllItems() {
-        Item item1 = itemRepository.save(anItem().withAmountOfStock(12).build());
-        Item item2 = itemRepository.save(anItem().withAmountOfStock(2).build());
-        Item item3 = itemRepository.save(anItem().withAmountOfStock(16).build());
-        Item item4 = itemRepository.save(anItem().withAmountOfStock(8).build());
-        Item item5 = itemRepository.save(anItem().withAmountOfStock(4).build());
+        ItemDto item1 = new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME),
+                        createAnItem().withAmountOfStock(12), ItemDto.class);
+        ItemDto item2 = new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME),
+                        createAnItem().withAmountOfStock(2), ItemDto.class);
+        ItemDto item3 = new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME),
+                        createAnItem().withAmountOfStock(16), ItemDto.class);
+        ItemDto item4 = new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME),
+                        createAnItem().withAmountOfStock(8), ItemDto.class);
+        ItemDto item5 = new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME),
+                        createAnItem().withAmountOfStock(4), ItemDto.class);
 
         ItemDto[] items = new TestRestTemplate()
                 .getForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME), ItemDto[].class);
 
         assertThat(items).hasSize(5);
-        assertThat(items[0]).isEqualToComparingFieldByFieldRecursively(itemMapper.toDto(item2));
-        assertThat(items[1]).isEqualToComparingFieldByFieldRecursively(itemMapper.toDto(item5));
-        assertThat(items[2]).isEqualToComparingFieldByFieldRecursively(itemMapper.toDto(item4));
-        assertThat(items[3]).isEqualToComparingFieldByFieldRecursively(itemMapper.toDto(item1));
-        assertThat(items[4]).isEqualToComparingFieldByFieldRecursively(itemMapper.toDto(item3));
+        assertThat(items[0]).isEqualToComparingFieldByFieldRecursively(item2);
+        assertThat(items[1]).isEqualToComparingFieldByFieldRecursively(item5);
+        assertThat(items[2]).isEqualToComparingFieldByFieldRecursively(item4);
+        assertThat(items[3]).isEqualToComparingFieldByFieldRecursively(item1);
+        assertThat(items[4]).isEqualToComparingFieldByFieldRecursively(item3);
     }
 
     @Test
     public void getAllItems_givenAStockUrgencyFilter_thenOnlyReturnItemsWithThatUrgency() {
-        Item item1 = itemRepository.save(anItem().withAmountOfStock(12).build());
-        Item item2 = itemRepository.save(anItem().withAmountOfStock(20).build());
-        itemRepository.save(anItem().withAmountOfStock(8).build());
-        Item item4 = itemRepository.save(anItem().withAmountOfStock(16).build());
-        itemRepository.save(anItem().withAmountOfStock(4).build());
+        ItemDto item1 = new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME),
+                        createAnItem().withAmountOfStock(12), ItemDto.class);
+        ItemDto item2 = new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME),
+                        createAnItem().withAmountOfStock(20), ItemDto.class);
+        new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME),
+                        createAnItem().withAmountOfStock(8), ItemDto.class);
+        ItemDto item4 = new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME),
+                        createAnItem().withAmountOfStock(16), ItemDto.class);
+        new TestRestTemplate()
+                .postForObject(format("http://localhost:%s/%s", getPort(), ItemController.RESOURCE_NAME),
+                        createAnItem().withAmountOfStock(4), ItemDto.class);
 
         ItemDto[] items = new TestRestTemplate()
                 .getForObject(format("http://localhost:%s/%s?stockUrgency=STOCK_HIGH", getPort(),
                         ItemController.RESOURCE_NAME), ItemDto[].class);
 
         assertThat(items).hasSize(3);
-        assertThat(items[0]).isEqualToComparingFieldByFieldRecursively(itemMapper.toDto(item1));
-        assertThat(items[1]).isEqualToComparingFieldByFieldRecursively(itemMapper.toDto(item4));
-        assertThat(items[2]).isEqualToComparingFieldByFieldRecursively(itemMapper.toDto(item2));
+        assertThat(items[0]).isEqualToComparingFieldByFieldRecursively(item1);
+        assertThat(items[1]).isEqualToComparingFieldByFieldRecursively(item4);
+        assertThat(items[2]).isEqualToComparingFieldByFieldRecursively(item2);
     }
 
     @Test
@@ -102,4 +121,11 @@ public class ItemControllerIntegrationTest extends ControllerIntegrationTest {
         assertThat(result.getBody()).isEqualToIgnoringGivenFields(itemToUpdate, "stockUrgency");
     }
 
+    private ItemDto createAnItem() {
+        return new ItemDto()
+                .withName("Half-Life 3")
+                .withDescription("Boehoehoe...")
+                .withPrice(45.50f)
+                .withAmountOfStock(50510);
+    }
 }

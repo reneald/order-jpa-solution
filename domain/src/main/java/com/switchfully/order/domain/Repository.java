@@ -10,7 +10,7 @@ public abstract class Repository<T extends BaseEntity> {
     @PersistenceContext
     private EntityManager entityManager;
 
-    protected EntityManager getEntityManager() {
+    public EntityManager getEntityManager() {
         return entityManager;
     }
 

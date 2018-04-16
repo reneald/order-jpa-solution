@@ -5,20 +5,31 @@ import com.switchfully.order.domain.items.prices.Price;
 import com.switchfully.order.domain.orders.orderitems.OrderItem;
 import com.switchfully.order.infrastructure.builder.Builder;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+@Entity
+@Table(name = "ORDERS")
 public class Order extends BaseEntity {
 
+    @ElementCollection
+    @CollectionTable(name="ORDER_ITEMS", joinColumns=@JoinColumn(name="ORDER_ID"))
     private List<OrderItem> orderItems;
-    private UUID customerId;
+
+    @Column(name = "CUSTOMER_ID")
+    private String customerId;
+
+    private Order() {
+        // hibernate
+    }
 
     public Order(OrderBuilder orderBuilder) {
         super(orderBuilder.id);
         orderItems = orderBuilder.orderItems;
-        customerId = orderBuilder.customerId;
+        customerId = orderBuilder.customerId == null ? null : orderBuilder.customerId.toString();
     }
 
     public List<OrderItem> getOrderItems() {
@@ -26,7 +37,10 @@ public class Order extends BaseEntity {
     }
 
     public UUID getCustomerId() {
-        return customerId;
+        if(customerId == null) {
+            return null;
+        }
+        return UUID.fromString(customerId);
     }
 
     public Price getTotalPrice() {

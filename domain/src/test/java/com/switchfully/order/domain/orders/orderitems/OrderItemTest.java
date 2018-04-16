@@ -8,6 +8,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.UUID;
 
 import static com.switchfully.order.domain.orders.orderitems.OrderItem.OrderItemBuilder.orderItem;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,6 +19,7 @@ public class OrderItemTest {
     public void getShippingDate_givenItemWasInStock_thenReturnCurrentDatePlusOneDay() {
         Clock fixedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
         OrderItem orderItem = new OrderItem(orderItem()
+                .withItemId(UUID.randomUUID())
                 .withOrderedAmount(5)
                 .withShippingDateBasedOnAvailableItemStock(10),
                 fixedClock);
@@ -29,6 +31,7 @@ public class OrderItemTest {
     public void getShippingDate_givenItemWasNotInStock_thenReturnCurrentDatePlusSevenDays() {
         Clock fixedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());
         OrderItem orderItem = new OrderItem(orderItem()
+                .withItemId(UUID.randomUUID())
                 .withOrderedAmount(5)
                 .withShippingDateBasedOnAvailableItemStock(4),
                 fixedClock);
@@ -39,6 +42,7 @@ public class OrderItemTest {
     @Test
     public void getTotalPrice() {
         OrderItem orderItem = orderItem()
+                .withItemId(UUID.randomUUID())
                 .withItemPrice(Price.create(BigDecimal.valueOf(15)))
                 .withOrderedAmount(3)
                 .build();

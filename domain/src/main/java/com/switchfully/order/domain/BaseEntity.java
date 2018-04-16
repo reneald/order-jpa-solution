@@ -31,6 +31,9 @@ public abstract class BaseEntity {
     }
 
     public UUID getId() {
+        if(id == null) {
+            return null;
+        }
         return UUID.fromString(id);
     }
 

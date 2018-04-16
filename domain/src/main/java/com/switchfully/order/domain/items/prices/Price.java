@@ -1,10 +1,13 @@
 package com.switchfully.order.domain.items.prices;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 import java.math.BigDecimal;
 
+@Embeddable
 public final class Price {
 
-    private final BigDecimal amount;
+    private BigDecimal amount;
 
     // hibernate
     private Price() {
@@ -12,7 +15,8 @@ public final class Price {
     }
 
     private Price(BigDecimal amount) {
-        this.amount = amount;
+        this();
+        setAmount(amount);
     }
 
     public static Price create(BigDecimal amount) {
@@ -23,6 +27,11 @@ public final class Price {
         return amount;
     }
 
+    private void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    @Transient
     public float getAmountAsFloat() {
         return amount.floatValue();
     }

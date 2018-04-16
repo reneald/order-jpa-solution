@@ -105,7 +105,7 @@ public class ItemValidatorTest {
     @Test
     public void isValidForUpdating_happyPath() {
         Item item = anItem().build();
-        Whitebox.setInternalState(item, "id", UUID.randomUUID());
+        Whitebox.setInternalState(item, "id", UUID.randomUUID().toString());
 
         assertThat(new ItemValidator()
                 .isValidForUpdating(item))

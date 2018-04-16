@@ -27,7 +27,7 @@ public class ItemMapperTest {
                 .withAmountOfStock(50520)
                 .build();
         UUID itemId = UUID.randomUUID();
-        Whitebox.setInternalState(item, "id", itemId);
+        Whitebox.setInternalState(item, "id", itemId.toString());
 
         ItemDto itemDto = new ItemMapper().toDto(item);
 

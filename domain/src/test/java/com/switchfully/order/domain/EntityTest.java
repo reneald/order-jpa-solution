@@ -26,7 +26,7 @@ public class EntityTest {
 
     @Test
     public void generateId_givenCustomerWithId_whenGeneratingId_thenThrowException() {
-        UUID id = UUID.randomUUID();
+        String id = UUID.randomUUID().toString();
         BaseEntity customer = aCustomer().build();
         Whitebox.setInternalState(customer, "id", id);
 

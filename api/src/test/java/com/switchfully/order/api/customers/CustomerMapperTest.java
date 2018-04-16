@@ -68,7 +68,7 @@ public class CustomerMapperTest {
                 .withPhoneNumber(phoneNumber)
                 .build();
         UUID customerId = UUID.randomUUID();
-        Whitebox.setInternalState(customer, "id", customerId);
+        Whitebox.setInternalState(customer, "id", customerId.toString());
 
         // when
         CustomerDto customerDto = customerMapper.toDto(customer);

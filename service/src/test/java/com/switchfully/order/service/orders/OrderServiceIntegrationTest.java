@@ -59,9 +59,16 @@ public class OrderServiceIntegrationTest extends IntegrationTest {
     @Test
     public void getAllOrders() {
         Item item = itemRepository.save(anItem().build());
-        Order order1 = orderRepository.save(anOrder().withOrderItems(anOrderItem().withItemId(item.getId()).build()).build());
-        Order order2 = orderRepository.save(anOrder().withOrderItems(anOrderItem().withItemId(item.getId()).build()).build());
-        Order order3 = orderRepository.save(anOrder().withOrderItems(anOrderItem().withItemId(item.getId()).build()).build());
+        Customer customer = customerRepository.save(aCustomer().build());
+        Order order1 = orderRepository.save(anOrder()
+                .withCustomerId(customer.getId())
+                .withOrderItems(anOrderItem().withItemId(item.getId()).build()).build());
+        Order order2 = orderRepository.save(anOrder()
+                .withCustomerId(customer.getId())
+                .withOrderItems(anOrderItem().withItemId(item.getId()).build()).build());
+        Order order3 = orderRepository.save(anOrder()
+                .withCustomerId(customer.getId())
+                .withOrderItems(anOrderItem().withItemId(item.getId()).build()).build());
 
         List<Order> allOrders = orderService.getAllOrders(false);
 
@@ -71,7 +78,10 @@ public class OrderServiceIntegrationTest extends IntegrationTest {
     @Test
     public void getAllOrders_onlyIncludeShippableToday() {
         Item item = itemRepository.save(anItem().build());
-        Order order1 = orderRepository.save(anOrder().withOrderItems(anOrderItem().withItemId(item.getId()).build()).build());
+        Customer customer = customerRepository.save(aCustomer().build());
+        Order order1 = orderRepository.save(anOrder()
+                .withCustomerId(customer.getId())
+                .withOrderItems(anOrderItem().withItemId(item.getId()).build()).build());
 
         List<Order> allOrders = orderService.getAllOrders(true);
 
