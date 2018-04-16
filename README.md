@@ -193,3 +193,9 @@ creation of that entity.
 ### Regarding TDD
 All flows and edge cases are covered. Around 90% of the code was written *test-first*. Do inspect those tests. You'll see (for example) 
 that for the services, I have both written *integration* and *unit* tests, it might be interesting to see which test covers what cases.
+
+### Regarding Validation
+We've created custom (own-made) validators that we use in our services. You can however, and this is highly advised, 
+use **Javax (Bean) Validation**. This way, we can annotate our instance variables of our domain entities and value objects
+with certain validation rules (e.g.: `@NotBlank` `@NotEmpty`, `@PositiveOrZero`,...). We then simply have to enable validation (on the services, using `@Validation`) to assert 
+all validation rules added inside of our domain.. 
