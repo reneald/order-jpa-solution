@@ -30,6 +30,10 @@
             <groupId>com.switchfully.order</groupId>
             <artifactId>domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.switchfully.order</groupId>
+            <artifactId>infrastructure</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
