@@ -30,9 +30,9 @@ www.switchfully.com
 - Run `mvn clean install`
 - Multiple ways of running:
     - Inside the target folder of jar, run the `war-1.0-SNAPSHOT.jar` using the `java -jar` command
-    - Run Application.java inside the IDE
+    - Run `Application.java` inside the IDE
     - Execute command `mvn spring-boot:run` from inside module (folder) war
-- Surf to `http://localhost:9000/example`
+- Perform one of the REST (HTTP) calls
 
 ## REST Endpoints
 
