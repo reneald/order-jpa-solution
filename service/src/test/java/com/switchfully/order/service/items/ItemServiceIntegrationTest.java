@@ -55,7 +55,7 @@ public class ItemServiceIntegrationTest extends IntegrationTest {
 
         List<Item> allItems = itemService.getAllItems();
 
-        assertThat(allItems).containsExactlyInAnyOrder(createdItem1, createdItem2);
+        assertThat(allItems).contains(createdItem1, createdItem2);
     }
 
 }

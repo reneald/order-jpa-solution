@@ -35,7 +35,7 @@ public class ItemRepositoryIntegrationTest extends IntegrationTest {
 
         Assertions.assertThat(updatedItem.getId()).isNotNull().isEqualTo(savedItem.getId());
         Assertions.assertThat(updatedItem.getAmountOfStock()).isEqualTo(8);
-        Assertions.assertThat(repository.getAll()).hasSize(1);
+        Assertions.assertThat(repository.getAll()).hasSize(5);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ItemRepositoryIntegrationTest extends IntegrationTest {
         List<Item> allItems = repository.getAll();
 
         Assertions.assertThat(allItems)
-                .containsExactlyInAnyOrder(itemOne, itemTwo);
+                .contains(itemOne, itemTwo);
     }
 
 }
