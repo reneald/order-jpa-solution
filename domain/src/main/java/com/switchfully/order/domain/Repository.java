@@ -21,7 +21,7 @@ public abstract class Repository<T extends BaseEntity> {
     }
 
     public T update(T entity) {
-        entityManager.persist(entity);
+        entityManager.merge(entity);
         return entity;
     }
 

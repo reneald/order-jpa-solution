@@ -50,7 +50,7 @@ public class ItemController {
         return filterOnStockUrgency(stockUrgency, allItems);
     }
 
-    @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ItemDto getItemById(@PathVariable String id) {
         return itemMapper.toDto(itemService.getItem(UUID.fromString(id)));
     }
