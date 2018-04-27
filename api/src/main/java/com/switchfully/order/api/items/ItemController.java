@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.print.attribute.standard.Media;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -47,6 +48,11 @@ public class ItemController {
                 .sorted(Comparator.comparingInt(ItemDto::getAmountOfStock))
                 .collect(Collectors.toList());
         return filterOnStockUrgency(stockUrgency, allItems);
+    }
+
+    @GetMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ItemDto getItemById(@PathVariable String id) {
+        return itemMapper.toDto(itemService.getItem(UUID.fromString(id)));
     }
 
     private List<ItemDto> filterOnStockUrgency(@RequestParam(name = "stockUrgency") String stockUrgency, List<ItemDto> allItems) {
