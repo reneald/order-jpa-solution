@@ -33,3 +33,23 @@ INSERT INTO items (id, name, description, amount_of_stock, price_amount)
         60,
         30
     );
+
+        INSERT INTO customers (
+            id, firstname, lastname,
+            email_local_part, email_domain, email_complete,
+            address_street_name, address_house_number, address_postal_code, address_country,
+            phone_number, phone_country_calling_code)
+        VALUES (
+            '3e01c4a1-7bcb-4ff8-a8c3-446b5b0eb4f9',
+            'Jake',
+            'Doe',
+            'john.doe',
+            'gmail.com',
+            'john.doe@gmail.com',
+            'Long Road',
+            '123',
+            'CA4050',
+            'YouNaaited States',
+            '987.777.666',
+            '+123'
+        );
