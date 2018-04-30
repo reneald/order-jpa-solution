@@ -125,7 +125,7 @@ public class CustomerControllerIntegrationTest extends ControllerIntegrationTest
         assertThat(createdCustomer.getAddress()).isEqualToComparingFieldByField(customerToCreate.getAddress());
         assertThat(createdCustomer.getPhoneNumber()).isEqualToComparingFieldByField(customerToCreate.getPhoneNumber());
         assertThat(createdCustomer.getEmail()).isEqualToComparingFieldByField(customerToCreate.getEmail());
-        assertThat(createdCustomer.getFirstname()).isEqualTo(customerToCreate.getFirstname());
-        assertThat(createdCustomer.getLastname()).isEqualTo(customerToCreate.getLastname());
+        assertThat(createdCustomer.getFirstName()).isEqualTo(customerToCreate.getFirstName());
+        assertThat(createdCustomer.getLastName()).isEqualTo(customerToCreate.getLastName());
     }
 }

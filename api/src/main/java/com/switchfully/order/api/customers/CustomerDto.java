@@ -9,8 +9,8 @@ import java.util.UUID;
 public class CustomerDto {
 
     private String id;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private EmailDto email;
     private AddressDto address;
     private PhoneNumberDto phoneNumber;
@@ -24,12 +24,12 @@ public class CustomerDto {
     }
 
     public CustomerDto withFirstname(String firstname) {
-        this.firstname = firstname;
+        this.firstName = firstname;
         return this;
     }
 
     public CustomerDto withLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastName = lastname;
         return this;
     }
 
@@ -52,12 +52,12 @@ public class CustomerDto {
         return id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
     public EmailDto getEmail() {

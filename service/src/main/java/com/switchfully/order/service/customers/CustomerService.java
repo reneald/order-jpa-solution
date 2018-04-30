@@ -39,4 +39,13 @@ public class CustomerService {
     public Customer getCustomer(UUID id) {
         return customerRepository.get(id);
     }
+
+    @Transactional
+    public Customer updateCustomer(Customer customer) {
+        if (!customerValidator.isValidForUpdating(customer)) {
+            customerValidator.throwInvalidStateException(customer, "updating");
+        }
+
+        return customerRepository.update(customer);
+    }
 }
