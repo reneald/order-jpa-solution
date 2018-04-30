@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/" + CustomerController.RESOURCE_NAME)
 public class CustomerController {
 
-    public static final String RESOURCE_NAME = "customers   ";
+    public static final String RESOURCE_NAME = "customers";
 
     private CustomerService customerService;
     private CustomerMapper customerMapper;
