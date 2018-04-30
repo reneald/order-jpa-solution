@@ -38,7 +38,7 @@ public class CustomerServiceIntegrationTest extends IntegrationTest{
 
         List<Customer> allCustomers = customerService.getAllCustomers();
 
-        assertThat(allCustomers).containsExactlyInAnyOrder(customer1, customer2, customer3);
+        assertThat(allCustomers).contains(customer1, customer2, customer3);
     }
 
     @Test

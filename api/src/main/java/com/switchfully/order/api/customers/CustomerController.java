@@ -31,6 +31,13 @@ public class CustomerController {
                         customerMapper.toDomain(customerDto)));
     }
 
+    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public CustomerDto updateItem(@PathVariable String id, @RequestBody CustomerDto customerDto) {
+        return customerMapper.toDto(
+                customerService.updateCustomer(
+                        customerMapper.toDomain(UUID.fromString(id), customerDto)));
+    }
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers().stream()

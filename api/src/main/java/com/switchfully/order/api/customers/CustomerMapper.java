@@ -35,12 +35,23 @@ public class CustomerMapper extends Mapper<CustomerDto, Customer> {
                 .withPhoneNumber(phoneNumberMapper.toDto(customer.getPhoneNumber()));
     }
 
+    public Customer toDomain(UUID id, CustomerDto customerDto){
+        if(customerDto.getId() == null) {
+            return toDomain(customerDto.withId(id));
+        }
+        if(!id.toString().equals(customerDto.getId())) {
+            throw new IllegalArgumentException("When updating a customer, the provided ID in the path should match the ID in the body: " +
+                    "ID in path = " + id.toString() + ", ID in body = " + customerDto.getId());
+        }
+        return toDomain(customerDto);
+    }
+
     @Override
     public Customer toDomain(CustomerDto customerDto) {
         return Customer.CustomerBuilder.customer()
                 .withId(customerDto.getId() == null ? null : UUID.fromString(customerDto.getId()))
-                .withLastname(customerDto.getLastname())
-                .withFirstname(customerDto.getFirstname())
+                .withLastname(customerDto.getLastName())
+                .withFirstname(customerDto.getFirstName())
                 .withAddress(addressMapper.toDomain(customerDto.getAddress()))
                 .withEmail(emailMapper.toDomain(customerDto.getEmail()))
                 .withPhoneNumber(phoneNumberMapper.toDomain(customerDto.getPhoneNumber()))

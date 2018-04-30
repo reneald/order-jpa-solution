@@ -43,7 +43,7 @@ public class CustomerRepositoryIntegrationTest extends IntegrationTest {
         List<Customer> allCustomers = repository.getAll();
 
         Assertions.assertThat(allCustomers)
-                .containsExactlyInAnyOrder(customerOne, customerTwo);
+                .contains(customerOne, customerTwo);
     }
 
 }
